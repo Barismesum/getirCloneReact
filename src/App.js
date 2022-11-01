@@ -6,15 +6,19 @@ import Card from "components/Card";
 import Footer from "components/Footer";
 import MobileApp from "components/MobileApp";
 import Categories from "components/Categories";
+import { useWindowWidth } from "@react-hook/window-size";
 
 function App() {
+  const windowWidth = useWindowWidth();
+
   return (
     <>
       <Header />
-      <HeroSection />
+      {windowWidth <= 768 && <Campaigns />}
+      <HeroSection/>
       <Categories />
-      <Campaigns />
-      <div className="container mx-auto">
+      {windowWidth > 768 && <Campaigns />}
+      <div className="container mx-auto grid gap-y-6 pt-8">
       <Favorites />
       <MobileApp />
       <Card />

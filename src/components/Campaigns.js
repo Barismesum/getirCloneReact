@@ -3,7 +3,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Banners from 'api/banners.json'
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useWindowWidth } from "@react-hook/window-size";
+
 
 function NextButton ({ onClick, className }) {
 	return (
@@ -13,6 +15,8 @@ function NextButton ({ onClick, className }) {
 	)
 }
 function PrevButton ({ onClick, className }) {
+  const windowWidth = useWindowWidth();
+
 	return (
 		<button className={`text-brand-color absolute top-1/2 -left-6 -translate-y-1/2`} onClick={onClick}>
 			<IoIosArrowBack size={22} />
@@ -59,7 +63,7 @@ setBanners(Banners)
 				}
 			},
 			{
-				breakpoint: 640,
+				breakpoint: 768,
 				settings: {
 					slidesToShow: 1,
           arrows:false,
@@ -69,14 +73,15 @@ setBanners(Banners)
     
   };
   return (
-    <div className='container mx-auto py-8'>
-      
-      <h3 className="text-sm font-semibold mb-3">Kampanyalar</h3>
-      <Slider {...settings} className="-mx-2">
+    <div className='container mx-auto md:pt-8 '>
+      <div className='hidden md:block'>
+      <h3 className="text-sm font-semibold mb-3 px-6 md:px-0">Kampanyalar</h3>
+      </div>
+      <Slider {...settings} className="md:-mx-2">
      {banners.length && banners.map((banner) =>(
       <div key={banner.id}>
-        <picture className='px-2 block'>
-        <img src={banner.image} className="rounded-lg"  />
+        <picture className='md:px-2 block'>
+        <img src={banner.image} className="md:rounded-lg "  />
         </picture>
       </div>
 
